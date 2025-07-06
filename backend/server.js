@@ -13,6 +13,7 @@ import session from "cookie-session"
 // app config
 const app = express()
 const port = 4000
+app.set("trust proxy", 1);
 
 
 // middlewares
