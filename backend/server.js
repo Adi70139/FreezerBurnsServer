@@ -33,16 +33,28 @@ app.use(passport.session());
 // OAuth2 routes
 app.get("/oauth2/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
-app.get(
-  "/oauth2/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/",
-    session: false,
+app.get("/oauth2/google/callback",passport.authenticate("google", {
+       failureRedirect: "/",
+       session: false,
   }),
   (req, res) => {
     // redirect to React with token and email
     const { token, email } = req.user;
-    res.redirect(`${process.env.CLIENT_URL}/oauth-success?token=${token}&email=${email}`);
+
+    res.cookie("oauthToken",token,{
+      httpOnly: false,
+      secure: true,
+      sameSite:"lax",
+      maxAge: 4*60*1000
+    })
+
+    res.cookie("oauthEmail",email,{
+      httpOnly: false,
+      secure: true,
+      sameSite:"lax",
+      maxAge: 4*60*1000
+    })
+    res.redirect(`${process.env.CLIENT_URL}/oauth-success`);
   }
 );
 
