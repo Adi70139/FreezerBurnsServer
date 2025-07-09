@@ -54,7 +54,7 @@ app.get("/oauth2/google/callback",passport.authenticate("google", {
       sameSite:"lax",
       maxAge: 4*60*1000
     })
-    res.redirect(`${process.env.CLIENT_URL}/oauth-success`);
+    res.redirect(`${process.env.CLIENT_URL}`);
   }
 );
 
