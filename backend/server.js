@@ -47,14 +47,14 @@ app.get("/oauth2/google/callback",passport.authenticate("google", {
     res.cookie("oauthToken",token,{
       httpOnly: false,
       secure: true,
-      sameSite:"none",
+      sameSite:"None",
       maxAge: 4*60*1000
     })
 
     res.cookie("oauthEmail",email,{
       httpOnly: false,
       secure: true,
-      sameSite:"none",
+      sameSite:"None",
       maxAge: 2*60*1000
     })
       res.redirect(`${process.env.CLIENT_URL}`);
