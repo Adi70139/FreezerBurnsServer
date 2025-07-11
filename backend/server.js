@@ -57,7 +57,7 @@ app.get("/oauth2/google/callback",passport.authenticate("google", {
       sameSite:"None",
       maxAge: 2*60*1000
     })
-     res.redirect(`${CLIENT_URL}/?token=${token}&email=${email}`);
+     res.redirect(`${CLIENT_URL}/oauth-success?token=${token}&email=${email}`);
     //res.redirect("http://localhost:5173/oauth-success");
   }
 );
